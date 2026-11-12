@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: os-service
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:os_service_db}
+    username: ${POSTGRES_USER:os_user}
+    password: ${POSTGRES_PASSWORD:os_password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    listener:
+      simple:
+        acknowledge-mode: auto
+        default-requeue-rejected: false
+
+server:
+  port: ${SERVER_PORT:8081}
+  forward-headers-strategy: framework
+
+oficina:
+  events:
+    exchange: oficina.events
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+    try-it-out-enabled: true
+
+security:
+  permit-all: ${SECURITY_PERMIT_ALL:true}
+  jwt:
+    secret: ${JWT_SECRET:os-service-local-hs512-secret-not-for-production-000000000000000001}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: when_authorized
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  level:
+    com.postech.osservice: INFO
+    org.springframework.amqp: INFO

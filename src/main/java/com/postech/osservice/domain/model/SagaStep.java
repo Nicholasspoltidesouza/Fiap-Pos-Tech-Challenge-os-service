@@ -1,0 +1,15 @@
+package com.postech.osservice.domain.model;
+
+public enum SagaStep {
+    CREATED,
+    QUOTE_REQUESTED,
+    QUOTE_GENERATED,
+    QUOTE_APPROVED,
+    PAYMENT_REQUESTED,
+    PAYMENT_APPROVED,
+    EXECUTION_STARTED,
+    EXECUTION_FINISHED,
+    COMPLETED,
+    COMPENSATING,
+    COMPENSATED
+}

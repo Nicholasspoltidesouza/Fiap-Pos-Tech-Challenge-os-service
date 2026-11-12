@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: os-service-config
+  namespace: oficina-os
+data:
+  SERVER_PORT: "8081"
+  SPRING_PROFILES_ACTIVE: "local"
+  POSTGRES_HOST: "os-postgres"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: "os_service_db"
+  RABBITMQ_HOST: "os-rabbitmq"
+  RABBITMQ_PORT: "5672"
+  SECURITY_PERMIT_ALL: "true"
+  SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
