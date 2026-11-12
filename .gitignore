@@ -25,3 +25,6 @@ coverage/
 *.swp
 *~
 .factorypath
+
+# temporarily ignored until workflow scope is granted
+.github/workflows/ci-cd.yml
